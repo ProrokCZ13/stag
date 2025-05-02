@@ -5,14 +5,14 @@ import pro1.apiDataModel.ActionsList;
 
 public class Main1 {
     public static void main(String[] args) {
-        System.out.println(emptyActionsCount("KIKM",2024));
+        System.out.println(emptyActionsCount("KIKM", 2024));
     }
 
-    public static long emptyActionsCount(String department, int year)
-    {
-        String json = Api.getActionsByDepartment(department,year);
-        ActionsList actions= new Gson().fromJson(json, ActionsList.class);
+    public static long emptyActionsCount(String department, int year) {
+        String json = Api.getActionsByDepartment(department, year);
+        ActionsList actions = new Gson().fromJson(json, ActionsList.class);
 
-        return -1; // TODO 1.1: Vrať počet akcí, které mají 0 přihlášených studentů
+        // TODO 1.1: Vrať počet akcí, které mají 0 přihlášených studentů
+        return actions.items.stream().filter(a -> a.personsCount == 0).count();
     }
 }
